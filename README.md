@@ -6,6 +6,8 @@
 
 ---
 
+#### 🔗 Acesse também o Frontend - https://github.com/eduardoluccadev/gestao-usuarios-frontend
+
 ## 🚀 Tecnologias Utilizadas
 
 | Categoria | Tecnologia | Versão | Descrição |
@@ -53,46 +55,76 @@ O projeto segue a arquitetura em camadas (Controller, Service, Repository) com f
 🌀 Git
 
 ### 1️⃣ Clonar o repositório
-```bash
+
 git clone https://github.com/eduardoluccadev/gestao-usuarios-backend.git
+
 cd gestao-usuarios-backend
 
-2️⃣ Criar o Banco de Dados
+### 2️⃣ Criar o Banco de Dados
 Execute o comando SQL a seguir no seu SQL Server:
 CREATE DATABASE gestao_usuarios;
 
-3️⃣ Configurar o application.yml
+### 3️⃣ Configurar o application.yml
+
 Crie e preencha o arquivo de configuração
+
 src/main/resources/application.yml com suas credenciais locais:
+
 YAML
+```bash
+# 🧾 Exemplo de configuração do arquivo application.yml
+# Caminho: src/main/resources/application.yml
+# (preencha com as credenciais do seu ambiente local)
+
+server:
+  port: 8080
+
 spring:
   datasource:
-    url: jdbc:sqlserver://localhost:1433;databaseName=gestao_usuarios;encrypt=false
-    username: sa
-    password: SUA_SENHA
+    url: jdbc:sqlserver://localhost:1433;databaseName=gestao_usuarios;encrypt=false;trustServerCertificate=true
+    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    username: SEU_USUARIO_AQUI
+    password: SUA_SENHA_AQUI
+
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
     show-sql: true
-  flyway:
-    enabled: true
-    locations: classpath:db/migration
 
-security:
-  jwt:
-    secret: SUA_CHAVE_SECRETA # Gere uma chave segura e longa!
-    expirationMinutes: 60
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServerDialect
 
-4️⃣
-Instalar dependências e Iniciar
-Bash
-# Instala dependências e faz o build
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+  jackson:
+    serialization:
+      INDENT_OUTPUT: true
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+```
+### 4️⃣ Instalar dependências e Iniciar
+
+Instala dependências e faz o build
+
 ./mvnw clean install
 
-# Roda a aplicação
+Roda a aplicação
+
 ./mvnw spring-boot:run
 
-5️⃣ Acessar a API e Documentação
+### 5️⃣ Acessar a API e Documentação
+
 Recurso --> EndpointAPI
+
 Principal --> http://localhost:8080
+
 Documentação Swagger --> http://localhost:8080/swagger-ui/index.html
