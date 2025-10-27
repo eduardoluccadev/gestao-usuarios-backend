@@ -1,25 +1,47 @@
-# 🧱 Backend — Sistema de Gestão de Usuários
+# 🚀 Desafio Técnico – Sistema de Gestão de Usuários
 
-> API em **Java 21.0.5 + Spring Boot**, com autenticação **JWT**, migrações automáticas via **Flyway** e banco **SQL Server**.  
-> Projeto desenvolvido para o **Desafio Técnico – Sistema de Gestão de Usuários (Britech)**.
+## 📌 Objetivo
+Construir um sistema de **gestão de usuários** com autenticação e CRUD, seguindo boas práticas de desenvolvimento, versionamento e documentação.  
+Este backend foi desenvolvido em **Java 21.0.5 + Spring Boot**, com **JWT** para autenticação, **Flyway** para migrações automáticas e **SQL Server** como banco de dados.
+
+---
+
+## 🧩 Funcionalidades Implementadas
+
+✅ **Tela de Cadastro (Sign Up)**  
+✅ **Tela de Login** com fluxo de **“Esqueci minha senha”**  
+✅ **Área logada** com autenticação JWT  
+✅ **Listagem de usuários cadastrados**  
+✅ **Criação de novo usuário**  
+✅ **Edição de usuário existente**  
+✅ **Remoção de usuários**  
+✅ **Logout**  
+✅ **Migrações automáticas** via Flyway  
+✅ **Documentação da API com Swagger/OpenAPI**
 
 ---
 
 ## ⚙️ Como instalar
 
-**Pré-requisitos**
-- ☕ Java 21.0.5  
-- 🧰 Maven  
-- 🗄️ SQL Server  
-- 🌀 Git  
+### 🔧 Pré-requisitos
+- ☕ **Java 21.0.5**  
+- 🧰 **Maven**  
+- 🗄️ **SQL Server** (instalado ou em container)  
+- 🌀 **Git**
 
-**Configuração**
-1. Crie o banco:
-   ```sql
-   CREATE DATABASE gestao_usuarios;
-Crie src/main/resources/application-local.yml:
+---
 
-yaml
+### 🗂️ Passos de configuração
+
+#### 1️⃣ Clonar o projeto
+```bash
+git clone https://github.com/eduardoluccadev/gestao-usuarios-backend.git
+cd gestao-usuarios-backend
+CREATE DATABASE gestao_usuarios;
+
+3️⃣ Configurar o ambiente
+
+Crie o arquivo src/main/resources/application.yml:
 spring:
   datasource:
     url: jdbc:sqlserver://localhost:1433;databaseName=gestao_usuarios;encrypt=false
@@ -32,50 +54,43 @@ spring:
   flyway:
     enabled: true
     locations: classpath:db/migration
+
 security:
   jwt:
     secret: SUA_CHAVE_SECRETA
     expirationMinutes: 60
-Rode o projeto:
 
-bash
+4️⃣ Executar o projeto
 ./mvnw clean install
 ./mvnw spring-boot:run
-🔗 API: http://localhost:8080
+🔗 Acesse a API: http://localhost:8080
 
-🧩 Tecnologias
-Java 21.0.5
+5️⃣ Documentação Swagger
+Após rodar o projeto:
+👉 http://localhost:8080/swagger-ui/index.html
 
-Spring Boot (Web, Security, JPA/Hibernate)
+🧠 Tecnologias Utilizadas
+| Categoria      | Tecnologia                      |
+| :------------- | :------------------------------ |
+| Linguagem      | **Java 21.0.5**                 |
+| Framework      | **Spring Boot**                 |
+| Segurança      | **Spring Security + JWT**       |
+| Banco de Dados | **SQL Server**                  |
+| ORM            | **Spring Data JPA (Hibernate)** |
+| Migrações      | **Flyway**                      |
+| Build          | **Maven**                       |
+| Documentação   | **Swagger / OpenAPI**           |
 
-SQL Server
+🧭 Arquitetura do Projeto
 
-Flyway (migrações)
+🧩 Camadas Principais
 
-JWT (autenticação)
+Controller: expõe endpoints REST
 
-Maven
+Service: lógica de negócio
 
-🚀 Principais funcionalidades
-🔐 Login e autenticação via JWT
+Repository: persistência via JPA
 
-👤 Cadastro e gerenciamento de usuários
+Entity/DTO/Mapper: estrutura e conversão de dados
 
-📋 CRUD completo (criar, listar, editar, excluir)
-
-🧱 Migrações automáticas com Flyway
-
-⚙️ Rotas protegidas e validações
-
-📡 API RESTful modular e documentada
-
-🧭 Arquitetura
-bash
-src/main/java/com/gestao/usuarios/
- ├── security/   # JWT e filtros
- ├── user/       # Entidade, DTOs, Mapper e Repository
- ├── web/        # Controllers REST
- └── config/     # Configurações e Swagger
-Camadas: Controller → Service → Repository → Entity
-Padrões: DTOs · Mapper · JWT Filter · Flyway Migrations
-
+Security: autenticação JWT e controle de acesso
